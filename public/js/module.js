@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp', ['ui.router']);
+var app = angular.module('myApp', ['ui.router', 'ngMaterial']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -8,17 +8,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	.state('home', { url: '/',
 		templateUrl: '/html/home.html',
-		controller: 'mainCtrl' 
+		controller: 'mainCtrl'
 	})
-	
+
 	.state('formpage', { url: '/formpage',
 		templateUrl: '/html/formpage.html',
-		controller: 'formpageCtrl' 
+		controller: 'formpageCtrl  as ctrl'
 	})
 
 	.state('calculator', { url: '/calculator',
 		templateUrl: '/html/calculator.html',
-		controller: 'calculatorCtrl' 
+		controller: 'calculatorCtrl'
 	})
 
 
