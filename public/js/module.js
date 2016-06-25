@@ -25,5 +25,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	})
 
 
-	$urlRouterProvider.otherwise('/formpage');
+	$urlRouterProvider.otherwise('/home');
 });

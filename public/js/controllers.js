@@ -2,16 +2,32 @@
 
 var app = angular.module('myApp');
 
-app.controller('mainCtrl', function($scope) {
+app.controller('mainCtrl', function($scope,User,$state) {
+
 	console.log('mainCtrl!');
-    		// console.log(fx);
+    		
+  $scope.saveEmail = () => {
+
+    User.addEmail($scope.email);
+    $state.go('formpage');
+
+  };
+
+
+
+
+
+
+
     	});
 
 
 
 
-app.controller('formpageCtrl', function($scope) {
+app.controller('formpageCtrl', function($scope,User) {
 	console.log('formpageCtrl!');
+
+  console.log(User.email);
 
 
 });
