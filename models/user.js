@@ -7,10 +7,15 @@ const uuid = require('uuid');
 const moment = require('moment');
 const oxr = require('open-exchange-rates');
 const fx = require('money');
+const request = require('request');
+var helper = require('sendgrid').mail;
+var sg = require('sendgrid').SendGrid(process.env.SENDGRID_API_KEY);
+
+console.log('send apikey:', process.env.SENDGRID_API_KEY);
 
 //conversion setup
-oxr.set({app_id:'74f027b4142e443ab217bd7158238a20'});
-oxr.latest( function() {
+oxr.set({ app_id: '74f027b4142e443ab217bd7158238a20' });
+oxr.latest(function() {
   fx.rates = oxr.rates;
   fx.base = oxr.base;
 });
@@ -32,11 +37,11 @@ db.query(`CREATE TABLE IF NOT EXISTS users(
 
 
 exports.getAll = () => {
-  return new Promise((resolve,reject) => {
+  return new Promise((resolve, reject) => {
     db.query('select * from users', (err, users) => {
-      if(err){
+      if (err) {
         reject(err);
-      }else{
+      } else {
         console.log(users);
         resolve(users);
       }
@@ -50,31 +55,67 @@ exports.addUser = userObject => {
   userObject.id = uuid();
   userObject.createdAt = moment().toISOString();
   let minAmount = userObject.minAmount;
-  let maxAmount = userObject. maxAmount;
+  let maxAmount = userObject.maxAmount;
 
   //convert min and max amount to USD
   userObject.minAmount = fx(minAmount).from(userObject.currentCur).to('USD');
   userObject.maxAmount = fx(maxAmount).from(userObject.currentCur).to('USD');
-  console.log("userObject: ",userObject);
+  console.log("userObject: ", userObject);
   return new Promise((resolve, reject) => {
     db.query('insert into users set ?', userObject, (err, users) => {
-      if(err) return reject(err);
+      if (err) return reject(err);
 
       //Search the database to see if there are any matches
       db.query(`SELECT * FROM users WHERE (currentCur = ? AND wantedCur = ? AND airport = ? AND
-       ((minAmount BETWEEN (?-100) AND (?+100)) OR (maxAmount BETWEEN (?-100) AND (?+100))))`
-        ,[userObject.wantedCur,userObject.currentCur,userObject.airport,userObject.minAmount,
-        userObject.minAmount,userObject.maxAmount,userObject.maxAmount], (err,matches) => {
-        if(err) {
+       ((minAmount BETWEEN (?-100) AND (?+100)) OR (maxAmount BETWEEN (?-100) AND (?+100))))`, [userObject.wantedCur, userObject.currentCur, userObject.airport, userObject.minAmount,
+        userObject.minAmount, userObject.maxAmount, userObject.maxAmount
+      ], (err, matches) => {
+        if (err) {
           reject(err);
-        }else {
-          console.log('matches:',matches);
-          let results = 
-          resolve(matches);
-        }
-      })
+        } else {
+          console.log('matches:', matches);
+          // let results = {
+          //   matches: matches,
+          //   original: userObject
+          // };
 
-      resolve();
+          //send the email to the most
+          if (matches.length > 0) {
+            sendEmailFoundMatch(matches, userObject, function(response) {
+
+              // if (err) {
+              //   reject(err);
+              // } else {
+              console.log('mailgrid:', response);
+              resolve(response);
+              // }
+
+            });
+          } else {
+            sendConfirmation(userObject, function(response) {
+
+              // if (err) {
+              //   reject(err);
+              // } else {
+              console.log('confirmation:', response);
+              //resolve(response);
+              // }
+              resolve(`No matches found yet, we will email you when we find a match. 
+              P.S. we send you an email confirming your inqury`);
+
+            });
+          }
+
+
+          // .then(emailResult => {
+          //   resolve(emailResult);
+          // }).catch(err => {
+          //   reject(err);
+          // })
+
+          // resolve(results);
+        }
+      });
     });
   });
 }
@@ -82,11 +123,146 @@ exports.addUser = userObject => {
 exports.deleteUser = id => {
   return new Promise((resolve, reject) => {
     db.query(`delete from users where id = "${id}"`, (err, users) => {
-      if(err) return reject(err);
+      if (err) return reject(err);
       resolve();
     });
   });
-}
+};
+
+
+
+function sendEmailFoundMatch(matches, originalUser, cb) {
+  console.log('in send email');
+
+  // let from_email = new helper.Email("me@thomaswolfe.me");
+  // let to_email1 = new helper.Email("tewolfe2@gmail.com");
+  // let to_email2 = new helper.Email("somtida.th@gmail.com");
+  // let subject = "Hello World from the SendGrid Node.js Library";
+  // let content = new helper.Content("text/plain", "some text here");
+  // let mail = new helper.Mail(from_email, subject, to_email1, content);
+  // var requestBody = mail.toJSON();
+  // console.log('requestBody:',requestBody.personalizations[0]);
+  // var request = sg.emptyRequest();
+  // request.method = 'POST';
+  // request.path = '/v3/mail/send';
+  // request.body = requestBody;
+  // sg.API(request, cb);
+
+
+
+
+  var request = sg.emptyRequest();
+  request.body = {
+    "content": [{
+      "type": "text/html",
+      "value": `<html><h1>Hello there!</h1>
+      <p>You have been matched, Congrats! </p>
+      </html>`
+    }],
+    "from": {
+      "email": "me@thomaswolfe.me",
+      "name": "XchangeIt"
+    },
+    "headers": {},
+    "mail_settings": {
+      "bcc": {
+        "email": "somtida.th@gmail.com",
+        "enable": true
+      },
+      "bypass_list_management": {
+        "enable": true
+      },
+      "footer": {
+        "enable": true,
+        "html": "<p>Thanks</br>The XchangeIt Team</p>"
+      }
+    },
+    "personalizations": [{
+      "bcc": [
+        {
+          "email": matches[0].email
+        }
+      ],
+      "cc": [{
+        "email": "ymoregola@gmail.com",
+        "name": "Yanick"
+      }],
+      "headers": {
+        "X-Accept-Language": "en",
+        "X-Mailer": "MyApp"
+      },
+      "send_at": 1409348513,
+      "subject": "You have been matched!",
+      "substitutions": {
+        "id": "substitutions",
+        "type": "object"
+      },
+      "to": [{
+        "email": originalUser.email,
+        "name": ""
+      }]
+    }]
+  }
+  request.method = 'POST';
+  request.path = '/v3/mail/send';
+  sg.API(request, cb);
+
+};
+
+
+function sendConfirmation(userObject,cb) {
+
+  var request = sg.emptyRequest();
+  request.body = {
+    "content": [{
+      "type": "text/html",
+      "value": `<html><h1>Hello there!</h1>
+      <p>We have recieved your request and will email you when we find someone who has ${userObject.wantedCur} 
+      and is looking for ${userObject.currentCur} at ${userObject.airport}.</p>
+      </html>`
+    }],
+    "from": {
+      "email": "me@thomaswolfe.me",
+      "name": "XchangeIt"
+    },
+    "headers": {},
+    "mail_settings": {
+      
+      "bypass_list_management": {
+        "enable": true
+      },
+      "footer": {
+        "enable": true,
+        "html": "<p>Thanks,</br>The XchangeIt Team</p>"
+      }
+    },
+    "personalizations": [{
+    
+      "headers": {
+        "X-Accept-Language": "en",
+        "X-Mailer": "MyApp"
+      },
+      "send_at": 1409348513,
+      "subject": "Hello, welcome to XchangeIt!",
+      // "substitutions": {
+      //   "id": "substitutions",
+      //   "type": "object"
+      // },
+      "to": [{
+        "email": userObject.email,
+        "name": ""
+      }]
+    }]
+  }
+  request.method = 'POST';
+  request.path = '/v3/mail/send';
+  sg.API(request, cb);
+
+};
+
+
+
+
 
 
 // exports.updateUser =  => {
