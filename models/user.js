@@ -5,9 +5,19 @@
 const db = require('../config/db');
 const uuid = require('uuid');
 const moment = require('moment');
+const oxr = require('open-exchange-rates');
+const fx = require('money');
+
+//conversion setup
+oxr.set({app_id:'74f027b4142e443ab217bd7158238a20'});
+oxr.latest( function() {
+  fx.rates = oxr.rates;
+  fx.base = oxr.base;
+});
 
 // db.query('drop table if exists users');
 
+//min and max amount will be stored in the database as USD
 db.query(`CREATE TABLE IF NOT EXISTS users(
   id VARCHAR(100),
   date VARCHAR(100),
@@ -39,11 +49,18 @@ exports.getAll = () => {
 exports.addUser = userObject => {
   userObject.id = uuid();
   userObject.createdAt = moment().toISOString();
+  let minAmount = userObject.minAmount;
+  let maxAmount = userObject. maxAmount;
+
+  //convert min and max amount to USD
+  userObject.minAmount = fx(minAmount).from(userObject.currentCur).to('USD');
+  userObject.maxAmount = fx(maxAmount).from(userObject.currentCur).to('USD');
   console.log("userObject: ",userObject);
   return new Promise((resolve, reject) => {
     db.query('insert into users set ?', userObject, (err, users) => {
       if(err) return reject(err);
 
+      //Search the database to see if there are any matches
       db.query(`SELECT * FROM users WHERE (currentCur = ? AND wantedCur = ? AND airport = ? AND
        ((minAmount BETWEEN (?-100) AND (?+100)) OR (maxAmount BETWEEN (?-100) AND (?+100))))`
         ,[userObject.wantedCur,userObject.currentCur,userObject.airport,userObject.minAmount,
@@ -52,6 +69,7 @@ exports.addUser = userObject => {
           reject(err);
         }else {
           console.log('matches:',matches);
+          let results = 
           resolve(matches);
         }
       })
