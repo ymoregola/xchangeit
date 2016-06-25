@@ -9,6 +9,7 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+// let fx = require("money");
 
 
 let app = express();
@@ -34,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 ///// ROUTERS ///////
 
-app.use('/users', require('./routes/users'));
+// app.use('/users', require('./routes/users'));
 
 //////////////////////
 
