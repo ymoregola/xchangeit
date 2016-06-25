@@ -14,11 +14,15 @@ app.service('User', function($http){
 
 
 
-  this.getAll = () => {
-		return $http.get('/users');
-	}
-	this.addUser = () => {
-		return $http.get('/users');
+ //  this.getAll = () => {
+	// 	return $http.get('/users');
+	// }
+	this.addUser = (userObj) => {
+    console.log(userObj);
+		return $http.post('/users',userObj)
+      .catch(err => {
+        console.log(err);
+      });
 	}
 })
 
