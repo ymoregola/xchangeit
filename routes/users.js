@@ -21,8 +21,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   User.addUser(req.body)
-    .then(() => {
-      res.send();
+    .then((matches) => {
+      res.send(matches);
     })
     .catch(err => {
       res.status(400).send(err);
