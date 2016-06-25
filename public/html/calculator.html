@@ -1,1 +1,24 @@
 <h1>Calculator</h1>
+
+
+
+<div class="container text-center">
+	<div>	
+		<input type="text" ng-model='baseCurrency'>
+		<input type="text" ng-model='wantedCurrency'>
+	</div>
+	<div>
+		<input class="text-center" id="amountInput" type="number" ng-model='amountToTrade' placeholder="Amount">
+	</div>
+
+	<div>
+		<button class="btn btn-info" id="calculateBtn" ng-click='calculateRate()'>Calculate</button>
+	</div>
+
+	<div class="renderExchangeRate" ng-show='showExchangeRate != null'>
+		<p>The currenct exchange rate is: {{showExchangeRateP1}}</p>
+		<p class='renderExchangeText'> {{ amountToTrade | currency : baseCurrency}} is equal to {{ showExchangeRate | currency :  wantedCurrency }}
+		</p>
+	
+	</div>
+</div>
