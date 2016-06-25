@@ -2,8 +2,19 @@
 
 var app = angular.module('myApp');
 
-app.service('Users', function($http){
-	this.getAll = () => {
+app.service('User', function($http){
+	
+
+  this.addEmail = (email) => {
+
+    this.email = email;
+    console.log(email);
+
+  };
+
+
+
+  this.getAll = () => {
 		return $http.get('/users');
 	}
 	this.addUser = () => {

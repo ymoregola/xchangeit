@@ -1,7 +1,5 @@
 'use strict'
 
-
-
 const db = require('../config/db');
 const uuid = require('uuid');
 const moment = require('moment');
