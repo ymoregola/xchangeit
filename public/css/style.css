@@ -1,0 +1,106 @@
+/* Colors:
+Green = #5FD4AF
+*/
+
+/* Global */
+body {
+	background-color: black;
+	font-family: 'Poiret One', cursive;	
+	color: #5FD4AF;
+	letter-spacing: 1px;
+}
+
+
+/*Home Page*/
+.mainTitle {
+	letter-spacing: 10px;	
+	font-size: 45px;
+	margin-top: 200px;
+}
+
+#homeEmailInput {
+	margin-top: 25px;
+	width: 200px;
+	height: 30px;
+	color: black;
+	font-size: 15px;
+	border: none;
+	border-top-style: none;
+}
+
+#homeEmailInput:focus, input:focus{
+    outline: none;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: black;  
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;  
+}
+:-ms-input-placeholder {  
+   color: black;  
+}
+
+.enterBtn {
+	margin-top: 40px;
+	height: 40px;
+	width: 80px;
+	font-size: 15px;
+	color: black;
+	letter-spacing: 7px;	
+	border-radius: 0%;
+	background-color: #5FD4AF;
+	border: none;
+}
+
+
+/* Form Page */
+.titleFormPage {
+	font-size: 20px;
+	margin-top: 40px;
+}
+
+select {
+  /*-webkit-appearance: none;*/
+  -webkit-border-radius: 0px;
+}
+
+.inputDropDown {
+	margin-top: 25px;
+	width: 200px;
+	height: 30px;
+	color: black;
+	font-size: 15px;
+	border: none;
+	border-radius: 0%;
+	border-top-style: none;
+	margin-top: -20px;
+}
+
+.formQuestionText {
+	margin-top: 40px;
+}
+
+.findMatchBtn {
+	margin-top: 40px;
+	height: 40px;
+	width: 165px;
+	font-size: 20px;
+	color: black;
+	letter-spacing: 5px;	
+	background-color: #5FD4AF;
+	border-radius: 0px;
+}
+
+
+
+
+
+
+
+
+
