@@ -21,8 +21,10 @@
     "ejs": "^2.4.2",
     "express": "^4.14.0",
     "moment": "^2.13.0",
+    "money": "^0.2.0",
     "morgan": "^1.7.0",
     "mysql": "^2.11.1",
+    "open-exchange-rates": "^0.3.0",
     "serve-favicon": "^2.3.0",
     "uuid": "^2.0.2"
   }
