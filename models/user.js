@@ -224,8 +224,8 @@ function sendConfirmation(userObject,cb) {
     "content": [{
       "type": "text/html",
       "value": `<html><h1>Hello there!</h1>
-      <p>We have recieved your request and will email you when we find someone who has ${userObject.wantedCur} 
-      and is looking for ${userObject.currentCur} at ${userObject.airport}.</p>
+      <p>We have recieved your request and will email you when we find someone who has <b>${userObject.wantedCur}</b> 
+      and is looking for <b>${userObject.currentCur}</b> at <b>${userObject.airport}</b>.</p>
       </html>`
     }],
     "from": {
@@ -268,7 +268,8 @@ function sendConfirmation(userObject,cb) {
 };
 
 
-
+// let arr = userObject.uuid.split('');
+// let url = 'https://tlk.io/' + arr.splice(30,36).join('');
 
 
 
