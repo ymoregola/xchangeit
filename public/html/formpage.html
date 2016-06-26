@@ -1,56 +1,74 @@
-<div class="containter-fluid text-center">
-    <h2 class="titleFormPage">Provide your Xchange details.</h2>
-    <div class="col-xs-12">
-        <form ng-Submit="addUser()">
-            <div>
-                <h4 class='formQuestionText'>Please, select an Airport</h4>
-                <input ng-model="newUser.airport" class="inputDropDown text-center" type="text" placeholder="Type airport name" spellcheck="false" required>
-                </input>
-            </div>
-            <div>
-                <h4 class='formQuestionText text-center'>What currency do you have?</h4>
-                <select ng-model='newUser.currentCur' class="inputDropDown" type="text" placeholder="placeholder" spellcheck="false" required>
-                    <option selected value="">Select currency</option>
-                    <option value="AUD">Australia Dollars – AUD</option>
-                    <option value="CAD">Canada Dollars – CAD</option>
-                    <option value="EUR">Euro – EUR</option>
-                    <option value="JPY">Japan Yen – JPY</option>
-                    <option value="KRW">Korea (South) Won – KRW</option>
-                    <option value="NZD">New Zealand Dollars – NZD</option>
-                    <option value="SEK">Sweden Kronor – SEK</option>
-                    <option value="CHF">Switzerland Francs – CHF</option>
-                    <option value="GBP">United Kingdom Pounds – GBP</option>
-                    <option value="USD">United States Dollars – USD</option>
-                </select>
-            </div>
-            <div>
-                <h4 class='formQuestionText'>What currency do you want?</h4>
-                <select ng-model="newUser.wantedCur" class="inputDropDown text-center" type="text" placeholder="placeholder" spellcheck="false" required>
-                    <option selected value="">Select currency</option>
-                    <option value="AUD">Australia Dollars – AUD</option>
-                    <option value="CAD">Canada Dollars – CAD</option>
-                    <option value="EUR">Euro – EUR</option>
-                    <option value="JPY">Japan Yen – JPY</option>
-                    <option value="KRW">Korea (South) Won – KRW</option>
-                    <option value="NZD">New Zealand Dollars – NZD</option>
-                    <option value="SEK">Sweden Kronor – SEK</option>
-                    <option value="CHF">Switzerland Francs – CHF</option>
-                    <option value="GBP">United Kingdom Pounds – GBP</option>
-                    <option value="USD">United States Dollars – USD</option>
-                </select>
-                </select>
-            </div>
-            <div class="col-xs-6">
-                <h4 class='formQuestionText'>Min. Amount</h4>
-                <input ng-model="newUser.minAmount" placeholder="Enter Min. Amount" type="number">
-            </div>
-            <div class="col-xs-6">
-                <h4 class='formQuestionText'>Max. Amount</h4>
-                <input ng-model="newUser.maxAmount" placeholder="Enter Max. Amount" type="number">
-            </div>
-            <div>
-                <button class="btn btn-primary findMatchBtn text-center-">Find Match</button>
-            </div>
-        </form>
+<div class="containter-fluid text-center ">
+
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand">XchangeIt</a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+        <li class="btn" ui-sref='home'><img src="/img/logo-for-nav.png" class="navImageLogo" alt="logo"></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="btn" ui-sref='calculator'><img src="/img/calculator-logo.png" class="navImageCalc" alt="calc"></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<h2 class="titleFormPage">Provide your Xchange details.</h2>
+<div class="col-xs-12">
+    <form ng-Submit="addUser()">
+        <div>
+            <h4 class='formQuestionText'>Please, select an Airport</h4>
+            <input ng-model="newUser.airport" class="inputDropDown text-center" type="text" placeholder="Type airport name" spellcheck="false" required>
+        </input>
     </div>
+    <div>
+        <h4 class='formQuestionText text-center'>What currency do you have?</h4>
+        <select ng-model='newUser.currentCur' class="inputDropDown" type="text" placeholder="placeholder" spellcheck="false" required>
+            <option selected value="">Select currency</option>
+            <option value="AUD">Australia Dollars – AUD</option>
+            <option value="CAD">Canada Dollars – CAD</option>
+            <option value="EUR">Euro – EUR</option>
+            <option value="JPY">Japan Yen – JPY</option>
+            <option value="KRW">Korea (South) Won – KRW</option>
+            <option value="NZD">New Zealand Dollars – NZD</option>
+            <option value="SEK">Sweden Kronor – SEK</option>
+            <option value="CHF">Switzerland Francs – CHF</option>
+            <option value="GBP">United Kingdom Pounds – GBP</option>
+            <option value="USD">United States Dollars – USD</option>
+        </select>
+    </div>
+    <div>
+        <h4 class='formQuestionText'>What currency do you want?</h4>
+        <select ng-model="newUser.wantedCur" class="inputDropDown text-center" type="text" placeholder="placeholder" spellcheck="false" required>
+            <option selected value="">Select currency</option>
+            <option value="AUD">Australia Dollars – AUD</option>
+            <option value="CAD">Canada Dollars – CAD</option>
+            <option value="EUR">Euro – EUR</option>
+            <option value="JPY">Japan Yen – JPY</option>
+            <option value="KRW">Korea (South) Won – KRW</option>
+            <option value="NZD">New Zealand Dollars – NZD</option>
+            <option value="SEK">Sweden Kronor – SEK</option>
+            <option value="CHF">Switzerland Francs – CHF</option>
+            <option value="GBP">United Kingdom Pounds – GBP</option>
+            <option value="USD">United States Dollars – USD</option>
+        </select>
+    </select>
+</div>
+<div class="col-xs-6">
+    <h4 class='formQuestionText'>Min. Amount</h4>
+    <input ng-model="newUser.minAmount" placeholder="Enter Min. Amount" type="number">
+</div>
+<div class="col-xs-6">
+    <h4 class='formQuestionText'>Max. Amount</h4>
+    <input ng-model="newUser.maxAmount" placeholder="Enter Max. Amount" type="number">
+</div>
+<div>
+    <button class="btn btn-primary findMatchBtn text-center-">Find Match</button>
+</div>
+</form>
+</div>
 </div>
