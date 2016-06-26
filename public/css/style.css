@@ -114,8 +114,9 @@ body {
 }
 
 .titleFormPage {
-	font-size: 20px;
-	margin-top: 40px;
+	    font-size: 30px;
+    margin-top: 40px;
+    font-weight: bold;
 }
 
 select {
@@ -125,7 +126,7 @@ select {
 
 .inputDropDown {
 	margin-top: 25px;
-	width: 80%;
+	width:63%;
 	height: 30px;
 	color: black;
 	font-size: 15px;
@@ -137,6 +138,7 @@ select {
 
 .formQuestionText {
 	margin-top: 40px;
+	font-weight: bold;
 }
 
 .findMatchBtn {

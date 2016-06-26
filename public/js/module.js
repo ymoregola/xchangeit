@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp', ['ui.router','oitozero.ngSweetAlert']);
+var app = angular.module('myApp', ['ui.router','oitozero.ngSweetAlert','ngMaterial']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -15,7 +15,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	.state('formpage', { 
 		url: '/formpage',
 		templateUrl: '/html/formpage.html',
-		controller: 'formpageCtrl' 
+		controller: 'formpageCtrl as ctrl' 
 	})
 
 	.state('calculator', { 
