@@ -1,7 +1,5 @@
 'use strict'
 
-
-
 const db = require('../config/db');
 const uuid = require('uuid');
 const moment = require('moment');
@@ -87,7 +85,11 @@ exports.addUser = userObject => {
               //   reject(err);
               // } else {
               console.log('mailgrid:', response);
-              resolve(response);
+              let output = {
+                foundMatch: true,
+                message: `We found you a match! Check your email for more details`
+              };
+              resolve(output);
               // }
 
             });
@@ -100,8 +102,13 @@ exports.addUser = userObject => {
               console.log('confirmation:', response);
               //resolve(response);
               // }
-              resolve(`No matches found yet, we will email you when we find a match. 
-              P.S. we send you an email confirming your inqury`);
+              let output = {
+                foundMatch: false,
+                message: `No matches found yet, we will email you when we find a match. 
+                            
+              P.S. we send you an email confirming your inqury.`
+              };
+              resolve(output);
 
             });
           }

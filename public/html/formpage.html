@@ -1,60 +1,80 @@
-
 <div class="containter-fluid text-center">
 
-		<h2 class="titleFormPage">Provide your Xchange details.</h2>
+    <h2 class="titleFormPage">Provide your Xchange details.</h2>
+    <div class="col-xs-12">
+        <form ng-Submit="addUser()">
+            <div>
+                <h4 class='formQuestionText'>Please, select an Airport</h4>
+                <!-- <input class="inputDropDown text-center" type="text" placeholder="Type airport name" spellcheck="false" required>
+                </input>
+            </div>
+						<div> -->
+							<div layout="column" ng-cloak>
+							  <md-content class=" text-center">
+							    <form ng-submit="$event.preventDefault()">
+							      <md-autocomplete ng-model="newUser.airport"
+							          md-selected-item="ctrl.selectedItem"
+							          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+							          md-search-text="ctrl.searchText"
+							          md-selected-item-change="ctrl.selectedItemChange(item)"
+							          md-items="item in ctrl.querySearch(ctrl.searchText)"
+							          md-item-text="item.display"
+							          md-min-length="0"
+							          placeholder="Please, select an Airport">
+							        <md-item-template>
+							          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+							        </md-item-template>
 
-	<form action="">
-		<div>
-			<h4 class='formQuestionText'>Please, select an Airport</h4>
-			<input class="inputDropDown text-center" type="text" placeholder="Type airport name" spellcheck="false" required>
-
-
-			<div layout="column" ng-cloak>
-			  <md-content class="md-padding">
-			    <form ng-submit="$event.preventDefault()">
-			      <md-autocomplete
-			          md-selected-item="ctrl.selectedItem"
-			          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-			          md-search-text="ctrl.searchText"
-			          md-selected-item-change="ctrl.selectedItemChange(item)"
-			          md-items="item in ctrl.querySearch(ctrl.searchText)"
-			          md-item-text="item.display"
-			          md-min-length="0"
-			          placeholder="What is your favorite US state?">
-			        <md-item-template>
-			          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-			        </md-item-template>
-			        <md-not-found>
-			          No states matching "{{ctrl.searchText}}" were found.
-			          <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
-			        </md-not-found>
-			      </md-autocomplete>
-			      </form>
-			  </md-content>
-			</div>
-
-
-
-
-
-
-		</div>
-
-		<div>
-			<h4 class='formQuestionText'>What currency do you have?</h4>
-			<select class="inputDropDown text-center" type="text" placeholder="placeholder" spellcheck="false" required>>
-			</select>
-		</div>
-
-		<div>
-			<h4 class='formQuestionText'>What currency do you want?</h4>
-			<select class="inputDropDown text-center" type="text" placeholder="placeholder" spellcheck="false" required>>
-			</select>
-		</div>
-
-			<div>
-				<button ui-sref='calculator' class="btn btn-primary findMatchBtn text-center-">Find Match</button>
-			</div>
-	</form>
+							      </md-autocomplete>
+							      </form>
+							  </md-content>
+							</div>
+						</div>
+            <div>
+                <h4 class='formQuestionText text-center'>What currency do you have?</h4>
+                <select ng-model='newUser.currentCur' class="inputDropDown" type="text" placeholder="placeholder" spellcheck="false" required>
+                    <option selected value="">Select currency</option>
+                    <option value="AUD">Australia Dollars – AUD</option>
+                    <option value="CAD">Canada Dollars – CAD</option>
+                    <option value="EUR">Euro – EUR</option>
+                    <option value="JPY">Japan Yen – JPY</option>
+                    <option value="KRW">Korea (South) Won – KRW</option>
+                    <option value="NZD">New Zealand Dollars – NZD</option>
+                    <option value="SEK">Sweden Kronor – SEK</option>
+                    <option value="CHF">Switzerland Francs – CHF</option>
+                    <option value="GBP">United Kingdom Pounds – GBP</option>
+                    <option value="USD">United States Dollars – USD</option>
+                </select>
+            </div>
+            <div>
+                <h4 class='formQuestionText'>What currency do you want?</h4>
+                <select ng-model="newUser.wantedCur" class="inputDropDown text-center" type="text" placeholder="placeholder" spellcheck="false" required>
+                    <option selected value="">Select currency</option>
+                    <option value="AUD">Australia Dollars – AUD</option>
+                    <option value="CAD">Canada Dollars – CAD</option>
+                    <option value="EUR">Euro – EUR</option>
+                    <option value="JPY">Japan Yen – JPY</option>
+                    <option value="KRW">Korea (South) Won – KRW</option>
+                    <option value="NZD">New Zealand Dollars – NZD</option>
+                    <option value="SEK">Sweden Kronor – SEK</option>
+                    <option value="CHF">Switzerland Francs – CHF</option>
+                    <option value="GBP">United Kingdom Pounds – GBP</option>
+                    <option value="USD">United States Dollars – USD</option>
+                </select>
+                </select>
+            </div>
+            <div class="col-xs-6">
+                <h4 class='formQuestionText'>Min. Amount</h4>
+                <input ng-model="newUser.minAmount" placeholder="Enter Min. Amount" type="number">
+            </div>
+            <div class="col-xs-6">
+                <h4 class='formQuestionText'>Max. Amount</h4>
+                <input ng-model="newUser.maxAmount" placeholder="Enter Max. Amount" type="number">
+            </div>
+            <div>
+                <button class="btn btn-primary findMatchBtn text-center-">Find Match</button>
+            </div>
+        </form>
+    </div>
 
 </div>

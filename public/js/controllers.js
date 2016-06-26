@@ -2,21 +2,59 @@
 
 var app = angular.module('myApp');
 
-app.controller('mainCtrl', function($scope) {
+app.controller('mainCtrl', function($scope, User, $state) {
+
   console.log('mainCtrl!');
+
+  $scope.saveEmail = () => {
+
+    User.addEmail($scope.email);
+    $state.go('formpage');
+
+
+  };
+
+
+
+
+
+
+
 });
 
 
 
 
-app.controller('formpageCtrl', function($scope, $timeout, $q, $log,$http) {
+
+app.controller('formpageCtrl', function($scope, $timeout, $q, $log,$http, User,$state) {
   console.log('formpageCtrl!');
 
+  $scope.newUser = {};
+  $scope.newUser.email = User.email;
+
+  console.log($scope.newUser);
+
+  $scope.addUser = () => {
+    User.addUser($scope.newUser)
+      .then(res => {
+        // console.log(res);
+        if(res.data.foundMatch) {
+          alert(res.data.message);
+          $state.go('calculator');
+        } else {
+          alert(res.data.message);
+          $state.go('calculator');
+        }
+
+      })
+
+
+  }
+///auto complete//////////////////
   var self = this;
   self.simulateQuery = false;
   self.isDisabled    = false;
-  // list of `state` value/display objects
-  self.states        = loadAll();
+  self.airports        = loadAll();
   self.querySearch   = querySearch;
   self.selectedItemChange = selectedItemChange;
   self.searchTextChange   = searchTextChange;
@@ -24,18 +62,11 @@ app.controller('formpageCtrl', function($scope, $timeout, $q, $log,$http) {
   function newState(state) {
     alert("Sorry! You'll need to create a Constituion for " + state + " first!");
   }
-  // ******************************
-  // Internal methods
-  // ******************************
-  /**
-   * Search for states... use $timeout to simulate
-   * remote dataservice call.
-   */
+
   function querySearch (query) {
-    console.log("query: ",query);
-    var results = query ? self.states.filter( createFilterFor(query) ) : self.states,
+    var results = query ? self.airports.filter( createFilterFor(query) ) : self.airports,
         deferred;
-    console.log("results: ",results);
+    // console.log("results: ",results);
     if (self.simulateQuery) {
       deferred = $q.defer();
       $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
@@ -45,65 +76,33 @@ app.controller('formpageCtrl', function($scope, $timeout, $q, $log,$http) {
     }
   }
   function searchTextChange(text) {
-    $log.info('Text changed to ' + text);
+    // $log.info('Text changed to ' + text);
   }
   function selectedItemChange(item) {
     $log.info('Item changed to ' + JSON.stringify(item));
   }
-  /**
-   * Build `states` list of key/value pairs
-   */
+
+
    function loadAll() {
-      var allStates = 'Hartsfield–Jackson Atlanta International Airport, Los Angeles International Airport,\
+      var allAirports = 'Hartsfield–Jackson Atlanta International Airport, Los Angeles International Airport,\
        O\'Hare International Airport, Dallas/Fort Worth International Airport, John F. Kennedy International Airport,\
         Beijing Capital International, London Heathrow, Tokyo International, Chicago O’Hare International, Los Angeles International,\
-        Charles de Gaulle International, Dallas Fort Worth International, Soekarno-Hatta International, Dubai International';
-      let iata = ['ATL', 'LAX', 'ORD', 'DFW', 'JFK', 'PEK', 'LHR', 'HND', 'ORD', 'LAX', 'CDG', 'DFW', 'CGK', 'DXB'];
-      let output = allStates.split(/, +/g).map( (state, index) => {
+        Charles de Gaulle International, Dallas Fort Worth International, Soekarno-Hatta International, Dubai International, Frankfurt am Main International,\
+        Hong Kong International Kai Tak, Denver International, Thailand Suvarnabhumi, Singapore Changi International, Madrid Barajas International, Incheon International, Amsterdam Schiphol,\
+        Sydney Kingsford Smith International';
+      let iata = ['ATL', 'LAX', 'ORD', 'DFW', 'JFK', 'PEK', 'LHR', 'HND', 'ORD', 'LAX', 'CDG', 'DFW', 'CGK', 'DXB','FRA','HKG','DEN','BKK','SIN','MAD','ICN','AMS','SYD'];
+      let output = allAirports.split(/, +/g).map( (airport, index) => {
         return {
-          value: iata[index],
-          display: state
-          // iata:iata[index]
+          value: airport.toLowerCase(),
+          iata: iata[index],
+          display: airport
         };
       });
-      console.log("output", output);
+      // console.log("output", output);
       return output;
     }
-  //  function loadAll() {
-  //    var allStates = 'Hartsfield–Jackson Atlanta International Airport, Los Angeles International Airport,\
-  //     O\'Hare International Airport, Dallas/Fort Worth International Airport, John F. Kennedy International Airport,\
-  //      Beijing Capital International, London Heathrow, Tokyo International, Chicago O’Hare International, Los Angeles International,\
-  //      Charles de Gaulle International, Dallas Fort Worth International, Soekarno-Hatta International, Dubai International';
-  //     let output = allStates.split(/, +/g).map( function (state) {
-  //       return {
-  //         value: state.toLowerCase(),
-  //         display: state
-  //       };
-  //     });
-  //     console.log(output);
-  //     return output;
-  //   }
-  // function loadAll() {
-  //   let allStates=[];
-  //   $http.get('/depen/airports.json').then((res) => {
-  //     console.log(res.data);
-  //
-  //
-  //     res.data.forEach((elem) => {
-  //       allStates.push({
-  //         value: elem.iata.toLowerCase(),
-  //       display: elem.name
-  //     });
-  //   })
-  //       // debugger;
-  //     console.log(allStates);
-  //
-  //   });
-  //     return allStates;
-  // }
-  /**
-   * Create filter function for a query string
-   */
+
+
   function createFilterFor(query) {
     var lowercaseQuery = angular.lowercase(query);
     return function filterFn(state) {
@@ -111,17 +110,36 @@ app.controller('formpageCtrl', function($scope, $timeout, $q, $log,$http) {
     };
   }
 
-
-
 });
 
 
 
-
-app.controller('calculatorCtrl', function($scope) {
+app.controller('calculatorCtrl', function($scope, Exchanges, $state) {
   console.log('calculatorCtrl!');
 
+  // console.log(fx);
+  $scope.calculateRate = () => {
+    Exchanges.getAll()
+      .then(res => {
+        if (typeof fx !== "undefined" && fx.rates) {
+          fx.rates = res.data.rates;
+          fx.base = res.data.base;
+        } else {
+          // If not, apply to fxSetup global:
+          var fxSetup = {
+            rates: res.data.rates,
+            base: res.data.base
+          }
+        }
+        $scope.showExchangeRateP1 = (fx.convert(1.00, { from: $scope.baseCurrency, to: $scope.wantedCurrency }));
+        $scope.showExchangeRate = (fx.convert(parseInt($scope.amountToTrade), { from: $scope.baseCurrency, to: $scope.wantedCurrency }));
 
+
+      });
+    console.log('Exchanges', Exchanges);
+
+    // console.log('outt',fx.convert(12.99, {from: "GBP", to: "HKD"}));
+  };
 
 
 });
