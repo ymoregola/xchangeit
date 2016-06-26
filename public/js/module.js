@@ -23,6 +23,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: '/html/calculator.html',
 		controller: 'calculatorCtrl' 
 	})
+	.state('chat', {
+		url: '/chat/:chatId',
+		templateUrl: '/html/chat.html',
+		controller: 'chatController'
+	})
 
 
 	$urlRouterProvider.otherwise('/');
