@@ -19,6 +19,7 @@ app.service('User', function($http){
 	// }
 	this.addUser = (userObj) => {
     console.log(userObj);
+
 		return $http.post('/users',userObj)
       .catch(err => {
         console.log(err);
