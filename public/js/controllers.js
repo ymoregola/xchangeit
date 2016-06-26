@@ -25,24 +25,45 @@ app.controller('mainCtrl', function($scope, User, $state) {
 
 
 
-app.controller('formpageCtrl', function($scope, User,$state) {
+app.controller('formpageCtrl', function($scope, User,$state,SweetAlert) {
   // console.log('formpageCtrl!');
   // console.log($scope.newUser);
+  $scope.isLoading=false;
+  $scope.buttonText = 'Find Match';
   $scope.newUser = {};
+
   $scope.newUser.email = User.email;
 
   console.log($scope.newUser);
 
   $scope.addUser = () => {
+    $scope.buttonText = '';
+    $scope.isLoading = true;
     User.addUser($scope.newUser) 
       .then(res => {
+        $scope.isLoading = false;
+        $scope.buttonText = 'Find Match';
         // console.log(res);
         if(res.data.foundMatch) {
-          alert(res.data.message);
-          $state.go('calculator');
+          SweetAlert.swal({
+            title:"We found a match!",
+            text: res.data.message, 
+            type: "success"},
+            function() {
+              $state.go('calculator');
+          });
+          // alert(res.data.message);
+          
         } else {
-          alert(res.data.message);
-          $state.go('calculator');
+         SweetAlert.swal({
+            title:"Information Submited!",
+            text: res.data.message, 
+            type: "success"},
+            function() {
+              $state.go('calculator');
+          });
+          // alert(res.data.message);
+          // $state.go('calculator');
         }
         
       })

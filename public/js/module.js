@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp', ['ui.router']);
+var app = angular.module('myApp', ['ui.router','oitozero.ngSweetAlert']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
