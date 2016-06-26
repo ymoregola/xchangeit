@@ -161,14 +161,13 @@ function sendEmailFoundMatch(matches, originalUser, cb) {
 
 
 let arr = originalUser.id.split('');
-let URL = 'https://tlk.io/' + arr.splice(30,36).join('');
+let URL = 'https://tlk.io/' + arr.splice(0,30).join('');
 
   var request = sg.emptyRequest();
   request.body = {
     "content": [{
       "type": "text/html",
-      "value": `<html><h1>Hello there!</h1>
-      <p>You have been matched, Congrats! </p><br>
+      "value": `<html><h2>You have been matched, Congrats! </h2><br>
       <p> Go <a href=${URL}>here</a> to start chatting with your match.
       </html>`
     }],
@@ -187,7 +186,7 @@ let URL = 'https://tlk.io/' + arr.splice(30,36).join('');
       },
       "footer": {
         "enable": true,
-        "html": "<p>Thanks,</br>The XchangeIt Team</p>"
+        "html": "<p>Thanks,<br>The XchangeIt Team</p>"
       }
     },
     "personalizations": [{
@@ -229,8 +228,8 @@ function sendConfirmation(userObject,cb) {
   request.body = {
     "content": [{
       "type": "text/html",
-      "value": `<html><h1>Hello there!</h1>
-      <p>We have recieved your request and will email you when we find someone who has <b>${userObject.wantedCur}</b> 
+      "value": `<html><h2>We have recieved your request</h2>
+      <p>We will email you when we find someone who has <b>${userObject.wantedCur}</b> 
       and is looking for <b>${userObject.currentCur}</b> at <b>${userObject.airport}</b>.</p>
       </html>`
     }],
@@ -246,7 +245,7 @@ function sendConfirmation(userObject,cb) {
       },
       "footer": {
         "enable": true,
-        "html": "<p>Thanks,</br>The XchangeIt Team</p>"
+        "html": "<p>Thanks,<br>The XchangeIt Team</p>"
       }
     },
     "personalizations": [{
