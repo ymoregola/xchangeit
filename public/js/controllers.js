@@ -25,25 +25,56 @@ app.controller('mainCtrl', function($scope, User, $state) {
 
 
 
+<<<<<<< HEAD
 
 app.controller('formpageCtrl', function($scope, $timeout, $q, $log,$http, User,$state) {
   console.log('formpageCtrl!');
 
+=======
+app.controller('formpageCtrl', function($scope, User,$state,SweetAlert) {
+  // console.log('formpageCtrl!');
+  // console.log($scope.newUser);
+  $scope.isLoading=false;
+  $scope.buttonText = 'Find Match';
+>>>>>>> ca3be84eda1c999a212ca8c8b1e9a0f0907cb4a7
   $scope.newUser = {};
+
   $scope.newUser.email = User.email;
 
   console.log($scope.newUser);
 
   $scope.addUser = () => {
+<<<<<<< HEAD
     User.addUser($scope.newUser)
+=======
+    $scope.buttonText = '';
+    $scope.isLoading = true;
+    User.addUser($scope.newUser)
+>>>>>>> ca3be84eda1c999a212ca8c8b1e9a0f0907cb4a7
       .then(res => {
+        $scope.isLoading = false;
+        $scope.buttonText = 'Find Match';
         // console.log(res);
         if(res.data.foundMatch) {
-          alert(res.data.message);
-          $state.go('calculator');
+          SweetAlert.swal({
+            title:"We found a match!",
+            text: res.data.message,
+            type: "success"},
+            function() {
+              $state.go('calculator');
+          });
+          // alert(res.data.message);
+
         } else {
-          alert(res.data.message);
-          $state.go('calculator');
+         SweetAlert.swal({
+            title:"Information Submited!",
+            text: res.data.message,
+            type: "success"},
+            function() {
+              $state.go('calculator');
+          });
+          // alert(res.data.message);
+          // $state.go('calculator');
         }
 
       })

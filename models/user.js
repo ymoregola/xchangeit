@@ -87,7 +87,9 @@ exports.addUser = userObject => {
               console.log('mailgrid:', response);
               let output = {
                 foundMatch: true,
-                message: `We found you a match! Check your email for more details`
+                message: `We found you a match! Check your email for more details.
+
+                          In the meantime, click OK to be redirected to our currency conversion calculator.        `
               };
               resolve(output);
               // }
@@ -105,8 +107,10 @@ exports.addUser = userObject => {
               let output = {
                 foundMatch: false,
                 message: `No matches found yet, we will email you when we find a match. 
-                            
-              P.S. we send you an email confirming your inqury.`
+
+                          In the meantime, click OK to be redirected to our currency conversion calculator.   
+
+              P.S. We send you an email confirming your inqury.`
               };
               resolve(output);
 
@@ -156,14 +160,16 @@ function sendEmailFoundMatch(matches, originalUser, cb) {
   // sg.API(request, cb);
 
 
-
+let arr = originalUser.id.split('');
+let URL = 'https://tlk.io/' + arr.splice(30,36).join('');
 
   var request = sg.emptyRequest();
   request.body = {
     "content": [{
       "type": "text/html",
       "value": `<html><h1>Hello there!</h1>
-      <p>You have been matched, Congrats! </p>
+      <p>You have been matched, Congrats! </p><br>
+      <p> Go <a href=${URL}>here</a> to start chatting with your match.
       </html>`
     }],
     "from": {
@@ -181,7 +187,7 @@ function sendEmailFoundMatch(matches, originalUser, cb) {
       },
       "footer": {
         "enable": true,
-        "html": "<p>Thanks</br>The XchangeIt Team</p>"
+        "html": "<p>Thanks,</br>The XchangeIt Team</p>"
       }
     },
     "personalizations": [{
@@ -224,8 +230,8 @@ function sendConfirmation(userObject,cb) {
     "content": [{
       "type": "text/html",
       "value": `<html><h1>Hello there!</h1>
-      <p>We have recieved your request and will email you when we find someone who has ${userObject.wantedCur} 
-      and is looking for ${userObject.currentCur} at ${userObject.airport}.</p>
+      <p>We have recieved your request and will email you when we find someone who has <b>${userObject.wantedCur}</b> 
+      and is looking for <b>${userObject.currentCur}</b> at <b>${userObject.airport}</b>.</p>
       </html>`
     }],
     "from": {
@@ -268,7 +274,8 @@ function sendConfirmation(userObject,cb) {
 };
 
 
-
+// let arr = userObject.uuid.split('');
+// let url = 'https://tlk.io/' + arr.splice(30,36).join('');
 
 
 

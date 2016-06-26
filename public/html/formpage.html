@@ -65,14 +65,14 @@
             </div>
             <div class="col-xs-6">
                 <h4 class='formQuestionText'>Min. Amount</h4>
-                <input ng-model="newUser.minAmount" placeholder="Enter Min. Amount" type="number">
+                <input ng-model="newUser.minAmount" placeholder="Enter Min. Amount" type="number" required>
             </div>
             <div class="col-xs-6">
                 <h4 class='formQuestionText'>Max. Amount</h4>
-                <input ng-model="newUser.maxAmount" placeholder="Enter Max. Amount" type="number">
+                <input ng-model="newUser.maxAmount" placeholder="Enter Max. Amount" type="number" required>
             </div>
             <div>
-                <button class="btn btn-primary findMatchBtn text-center-">Find Match</button>
+                <button ng-class="{'fa fa-spinner fa-pulse': isLoading}" class="btn btn-primary findMatchBtn text-center-">{{buttonText}}</button>
             </div>
         </form>
     </div>
