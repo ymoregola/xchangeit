@@ -169,3 +169,7 @@ app.controller('calculatorCtrl', function($scope, Exchanges, $state) {
 
 
 });
+
+
+
+

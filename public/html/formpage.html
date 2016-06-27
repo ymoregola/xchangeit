@@ -1,4 +1,23 @@
-<div class="containter-fluid text-center">
+
+<div class="containter-fluid text-center ">
+
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand">XchangeIt</a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+        <li class="btn" ui-sref='home'><img src="/img/logo-for-nav.png" class="navImageLogo" alt="logo"></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="btn" ui-sref='calculator'><img src="/img/calculator-logo.png" class="navImageCalc" alt="calc"></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- <div class="containter-fluid text-center"> -->
     <h2 class="titleFormPage">Provide your Xchange details.</h2>
     <div class="col-xs-12">
         <form ng-Submit="addUser()">
@@ -70,5 +89,6 @@
                 <button ng-class="{'fa fa-spinner fa-pulse': isLoading}" class="btn btn-primary findMatchBtn text-center-">{{buttonText}}</button>
             </div>
         </form>
-    </div>
+
+</div>
 </div>

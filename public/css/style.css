@@ -1,64 +1,118 @@
 /* Colors:
 Green = #5FD4AF
+Navy = #09002E
+Home Input Backgroung = #1A1634
+Input Gray Color = #A5A5A5;
 */
 
 /* Global */
+
 body {
-	background-color: black;
-	font-family: 'Poiret One', cursive;	
+	background-color: #09002E;
+	font-family: 'Montserrat', sans-serif;
 	color: #5FD4AF;
-	letter-spacing: 1px;
+}
+
+/* Placeholder color */
+::-webkit-input-placeholder {
+    color: #A5A5A5;
+    font-family: 'Open Sans', sans-serif;
+}
+:-moz-placeholder {
+    color: #A5A5A5;
+    font-family: 'Open Sans', sans-serif;
+}
+::-moz-placeholder {
+    color: #A5A5A5;
+    font-family: 'Open Sans', sans-serif;
+}
+:-ms-input-placeholder {
+    color: #A5A5A5;
+    font-family: 'Open Sans', sans-serif;
 }
 
 
 /*Home Page*/
+#mainPageLogo {
+	width: 100px;
+	margin-top: 120px; 
+}
+
 .mainTitle {
-	letter-spacing: 10px;	
-	font-size: 45px;
-	margin-top: 200px;
+	color: white;
+	letter-spacing: 1px;
+	font-size: 23px;
+	margin-top: 15px;
+}
+
+.tagLine {
+	font-size: 12px;
+	letter-spacing: 1px;
 }
 
 #homeEmailInput {
-	margin-top: 25px;
-	width: 200px;
-	height: 30px;
-	color: black;
+	margin-top: 50px;
+	width: 250px;
+	height: 25px;
+	color: #A5A5A5;
+  font-family: 'Open Sans', sans-serif;
 	font-size: 15px;
 	border: none;
 	border-top-style: none;
+	background-color: #1A1634;
 }
 
 #homeEmailInput:focus, input:focus{
     outline: none;
 }
 
-::-webkit-input-placeholder {
-   color: black;
-}
-:-moz-placeholder { /* Firefox 18- */
-   color: black;  
-}
-::-moz-placeholder {  /* Firefox 19+ */
-   color: black;  
-}
-:-ms-input-placeholder {  
-   color: black;  
-}
-
 .enterBtn {
-	margin-top: 40px;
-	height: 40px;
+	margin-top: 20px;
+	height: 30px;
 	width: 80px;
 	font-size: 15px;
-	color: black;
-	letter-spacing: 7px;	
+	color: white;	
+	letter-spacing: 1px;
 	border-radius: 0%;
 	background-color: #5FD4AF;
 	border: none;
+	padding-top: -20px;
+	padding-bottom: 20px;
 }
 
 
 /* Form Page */
+.navbar {
+    border-radius: 0%;
+    border: none;
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin:0 auto;
+}
+
+.navbar-toggle {
+    z-index:3;
+}
+
+.navImageLogo {
+	width: 30px;
+}
+
+.navImageCalc {
+	width: 30px;
+}
+
+.navBarText {
+	color: white;
+	font-size: 20px;
+	letter-spacing: 1px;
+}
+
 .titleFormPage {
 	    font-size: 30px;
     margin-top: 40px;
@@ -92,16 +146,16 @@ select {
 	height: 40px;
 	width: 165px;
 	font-size: 20px;
-	color: black;
-	letter-spacing: 5px;	
+	color: white;
+	letter-spacing: 1px;	
 	background-color: #5FD4AF;
 	border-radius: 0px;
 }
 
 
 /* Calculator Page*/
-input {
-	color: black;
+.calculatorTitle {
+	font-size: 20px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -112,21 +166,48 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 
+.inputDropDown {
+	width: 60%;
+	margin-top: 10px;
+}
+
 #amountInput {
 	margin-top: 15px;
+	color: #A5A5A5;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #calculateBtn {
 	margin-top: 20px;
 	border-radius: 0%;
+	background-color: #5FD4AF;
+	border: none;
+	letter-spacing: 1px;
 }
 
 .renderExchangeRate {
-	margin-top: 20px;
+	margin-top: 30px;
+	letter-spacing: 1px;
 }
 
 
+/* Perevent Navbar from Collapsing */
 
+.navbar-collapse.collapse {
+  display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+  float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px !important;
+}
+
+.navbar-right {
+  float: right!important;
+}
 
 
 

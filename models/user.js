@@ -87,7 +87,7 @@ exports.addUser = userObject => {
               console.log('mailgrid:', response);
               let output = {
                 foundMatch: true,
-                message: `We found you a match! Check your email for more details.
+                message: `Check your email for more details.
 
                           In the meantime, click OK to be redirected to our currency conversion calculator.        `
               };

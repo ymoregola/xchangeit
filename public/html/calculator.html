@@ -1,21 +1,63 @@
-<h1>Calculator</h1>
-
-
-
 <div class="container text-center">
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand">XchangeIt</a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+        <li class="btn" ui-sref='home'><img src="/img/logo-for-nav.png" class="navImageLogo" alt="logo"></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="btn" ui-sref='calculator'><img src="/img/calculator-logo.png" class="navImageCalc" alt="calc"></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+	<h2 class="calculatorTitle">Calculate your Xchange rate</h2>
+
 	<div>	
-		<input type="text" ng-model='baseCurrency'>
-		<input type="text" ng-model='wantedCurrency'>
+		<select ng-model='baseCurrency' class="inputDropDown" type="text" placeholder="placeholder" spellcheck="false" required>
+            <option selected value="">Select currency</option>
+            <option value="AUD">Australia Dollars – AUD</option>
+            <option value="CAD">Canada Dollars – CAD</option>
+            <option value="EUR">Euro – EUR</option>
+            <option value="JPY">Japan Yen – JPY</option>
+            <option value="KRW">Korea (South) Won – KRW</option>
+            <option value="NZD">New Zealand Dollars – NZD</option>
+            <option value="SEK">Sweden Kronor – SEK</option>
+            <option value="CHF">Switzerland Francs – CHF</option>
+            <option value="GBP">United Kingdom Pounds – GBP</option>
+            <option value="USD">United States Dollars – USD</option>
+        </select>
+    </div>
+
+		<select ng-model='wantedCurrency' class="inputDropDown" type="text" placeholder="placeholder" spellcheck="false" required>
+            <option selected value="">Select currency</option>
+            <option value="AUD">Australia Dollars – AUD</option>
+            <option value="CAD">Canada Dollars – CAD</option>
+            <option value="EUR">Euro – EUR</option>
+            <option value="JPY">Japan Yen – JPY</option>
+            <option value="KRW">Korea (South) Won – KRW</option>
+            <option value="NZD">New Zealand Dollars – NZD</option>
+            <option value="SEK">Sweden Kronor – SEK</option>
+            <option value="CHF">Switzerland Francs – CHF</option>
+            <option value="GBP">United Kingdom Pounds – GBP</option>
+            <option value="USD">United States Dollars – USD</option>
+        </select>
 	</div>
-	<div>
+	<div class="text-center">
 		<input class="text-center" id="amountInput" type="number" ng-model='amountToTrade' placeholder="Amount">
 	</div>
 
-	<div>
+	<div class="text-center">
 		<button class="btn btn-info" id="calculateBtn" ng-click='calculateRate()'>Calculate</button>
 	</div>
 
-	<div class="renderExchangeRate" ng-show='showExchangeRate != null'>
+
+	<div class="renderExchangeRate text-center" ng-show='showExchangeRate != null'>
 		<p>The currenct exchange rate is: {{showExchangeRateP1}}</p>
 		<p class='renderExchangeText'> {{ amountToTrade | currency : baseCurrency}} is equal to {{ showExchangeRate | currency :  wantedCurrency }}
 		</p>
