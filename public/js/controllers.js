@@ -15,11 +15,6 @@ app.controller('mainCtrl', function($scope, User, $state) {
   };
 
 
-
-
-
-
-
 });
 
 
@@ -146,6 +141,7 @@ app.controller('calculatorCtrl', function($scope, Exchanges, $state) {
   console.log('calculatorCtrl!');
   // console.log(fx);
   $scope.calculateRate = () => {
+
     Exchanges.getAll()
       .then(res => {
         if (typeof fx !== "undefined" && fx.rates) {
@@ -158,9 +154,12 @@ app.controller('calculatorCtrl', function($scope, Exchanges, $state) {
             base: res.data.base
           }
         }
-        $scope.showExchangeRateP1 = (fx.convert(1.00, { from: $scope.baseCurrency, to: $scope.wantedCurrency }));
-        $scope.showExchangeRate = (fx.convert(parseInt($scope.amountToTrade), { from: $scope.baseCurrency, to: $scope.wantedCurrency }));
-
+        $scope.showExchangeRateP1 = angular.copy((fx.convert(1.00, { from: $scope.baseCurrency, to: $scope.wantedCurrency })));
+        $scope.showExchangeRate = angular.copy((fx.convert(parseInt($scope.amountToTrade), { from: $scope.baseCurrency, to: $scope.wantedCurrency })));
+        $scope.base =$scope.baseCurrency;
+        $scope.wanted = $scope.wantedCurrency;
+        // $scope.wantedCurrency ='';
+        // $scope.baseCurrency='';
       });
     console.log('Exchanges', Exchanges);
 

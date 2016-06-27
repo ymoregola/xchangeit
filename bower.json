@@ -20,7 +20,8 @@
     "bootstrap": "^3.3.6",
     "angular-ui-router": "^0.3.1",
     "ngSweetAlert": "angular-sweetalert#^1.1.0",
-    "angular-material": "^1.0.9"
+    "angular-material": "^1.0.9",
+    "isoCurrency": "iso-currency#^0.2.4"
   },
   "resolutions": {
     "angular": "^1.5.7"

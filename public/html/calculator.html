@@ -58,8 +58,8 @@
 
 
 	<div class="renderExchangeRate text-center" ng-show='showExchangeRate != null'>
-		<p>The currenct exchange rate is: {{showExchangeRateP1}}</p>
-		<p class='renderExchangeText'> {{ amountToTrade | currency : baseCurrency}} is equal to {{ showExchangeRate | currency :  wantedCurrency }}
+		<p>The current exchange rate is: {{showExchangeRateP1 | number:4 }}</p>
+		<p class='renderExchangeText'> {{amountToTrade | currency:base}} is equal to {{ showExchangeRate | currency :  wanted }}
 		</p>
 	
 	</div>
