@@ -2,7 +2,7 @@
 Green = #5FD4AF
 Navy = #09002E
 Home Input Backgroung = #1A1634
-Input Gray Color = #A5A5A5;
+Input Gray #A5A5A5;
 */
 
 /* Global */
@@ -15,19 +15,20 @@ body {
 
 /* Placeholder color */
 ::-webkit-input-placeholder {
-    color: #A5A5A5;
+    color: black;
     font-family: 'Open Sans', sans-serif;
 }
+
 :-moz-placeholder {
-    color: #A5A5A5;
+    color: black;
     font-family: 'Open Sans', sans-serif;
 }
 ::-moz-placeholder {
-    color: #A5A5A5;
+    color: black;
     font-family: 'Open Sans', sans-serif;
 }
 :-ms-input-placeholder {
-    color: #A5A5A5;
+    color: black;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -51,7 +52,7 @@ body {
 }
 
 #homeEmailInput {
-	margin-top: 50px;
+	margin-top: 20px;
 	width: 250px;
 	height: 25px;
 	color: #A5A5A5;
@@ -60,6 +61,12 @@ body {
 	border: none;
 	border-top-style: none;
 	background-color: #1A1634;
+
+}
+
+#homeEmailInput::-webkit-input-placeholder {
+    color: #A5A5A5;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #homeEmailInput:focus, input:focus{
@@ -114,8 +121,8 @@ body {
 }
 
 .titleFormPage {
-	    font-size: 30px;
-    margin-top: 40px;
+	  font-size: 30px;
+    margin-top: 15px;
     font-weight: bold;
 }
 
@@ -129,6 +136,7 @@ select {
 	width:63%;
 	height: 30px;
 	color: black;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 15px;
 	border: none;
 	border-radius: 0%;
@@ -136,9 +144,27 @@ select {
 	margin-top: -20px;
 }
 
+.firstRowFromForm {
+	margin-top: 5px;
+}
+
+.airportInput {
+	padding-bottom: 8px;
+}
+
 .formQuestionText {
-	margin-top: 40px;
+/*	margin-top: 20px;*/
 	font-weight: bold;
+	padding-bottom: 25px; 	
+}
+
+.formAmountInput {
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: -10px;
+}
+
+.amountsTextInput {
+	color: black;
 }
 
 .findMatchBtn {
@@ -173,7 +199,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #amountInput {
 	margin-top: 15px;
-	color: #A5A5A5;
+	color: black;
   font-family: 'Open Sans', sans-serif;
 }
 
