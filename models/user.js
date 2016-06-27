@@ -9,7 +9,7 @@ const request = require('request');
 var helper = require('sendgrid').mail;
 var sg = require('sendgrid').SendGrid(process.env.SENDGRID_API_KEY);
 
-console.log('send apikey:', process.env.SENDGRID_API_KEY);
+// console.log('send apikey:', process.env.SENDGRID_API_KEY);
 
 //conversion setup
 oxr.set({ app_id: '74f027b4142e443ab217bd7158238a20' });
@@ -91,7 +91,11 @@ exports.addUser = userObject => {
 
                           In the meantime, click OK to be redirected to our currency conversion calculator.        `
               };
-              resolve(output);
+
+              deleteUser(userObject.id)
+                .then(deleteUser(matches[0].id))
+                .then(resolve(output));
+              // resolve(output);
               // }
 
             });
@@ -131,7 +135,8 @@ exports.addUser = userObject => {
   });
 }
 
-exports.deleteUser = id => {
+
+function deleteUser(id){
   return new Promise((resolve, reject) => {
     db.query(`delete from users where id = "${id}"`, (err, users) => {
       if (err) return reject(err);
