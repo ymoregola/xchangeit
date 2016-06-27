@@ -9,7 +9,7 @@ const request = require('request');
 var helper = require('sendgrid').mail;
 var sg = require('sendgrid').SendGrid(process.env.SENDGRID_API_KEY);
 
-console.log('send apikey:', process.env.SENDGRID_API_KEY);
+// console.log('send apikey:', process.env.SENDGRID_API_KEY);
 
 //conversion setup
 oxr.set({ app_id: '74f027b4142e443ab217bd7158238a20' });
