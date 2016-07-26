@@ -169,6 +169,7 @@ select {
 
 .findMatchBtn {
 	margin-top: 40px;
+  margin-bottom: 10px;
 	height: 40px;
 	width: 165px;
 	font-size: 20px;
@@ -176,6 +177,10 @@ select {
 	letter-spacing: 1px;	
 	background-color: #5FD4AF;
 	border-radius: 0px;
+
+}
+#formPage {
+  background-color: #09002E;
 }
 
 
